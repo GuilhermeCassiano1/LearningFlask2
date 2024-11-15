@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Language attribute -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Include the existing CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <!-- Dark Overlay -->
+    <div class="background-overlay"></div>
+
+    <!-- Signup Container -->
+    <div class="login-container">
+        <div class="login-box">
+            <!-- Logo -->
+            <img src="{{ url_for('static', filename='images/unr_logo.png') }}" alt="University of Nevada, Reno Logo" class="logo">
+            <h2>Create an Account</h2>
+            <!-- Signup Form -->
+            <form action="{{ url_for('account.signup') }}" method="POST">
+                <!-- Email Input -->
+                <input type="text" id="email" name="email" placeholder="Email" required>
+
+                <!-- Username Input -->
+                <input type="text" id="username" name="username" placeholder="Username" required>
+
+                <!-- Password Input -->
+                <input type="password" id="password" name="password" placeholder="Password" required>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+            <!-- Login Redirect Button -->
+            <div class="signin-options">
+                <button id="loginButton" data-url="{{ url_for('account.login') }}">Already have an account?</button>
+            </div>
+            <!-- Flashed Messages -->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="flashed-messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <!-- Include your JavaScript file -->
+    <script src="{{ url_for('static', filename='js/AccountLogic.js') }}"></script>
+</body>
+</html>

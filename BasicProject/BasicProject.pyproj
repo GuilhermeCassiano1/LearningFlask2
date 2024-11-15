@@ -16,7 +16,8 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>BasicProject</Name>
     <RootNamespace>BasicProject</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,12 +28,54 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="HelloFlask\checktables.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\createTables.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\db.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\init_db.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\tableEdit.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\queries.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\static\css\styles.css">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelloFlask\AccountLogicViews.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
     <Compile Include="HelloFlask\views.py" />
     <Compile Include="HelloFlask\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".env">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="HelloFlask\static\css\items.css" />
+    <Content Include="HelloFlask\static\css\L&amp;F.css" />
+    <Content Include="HelloFlask\static\js\map.js" />
+    <Content Include="HelloFlask\static\js\AccountLogic.js" />
+    <Content Include="HelloFlask\static\css\login.css" />
+    <Content Include="HelloFlask\templates\AccountLogic\JavaScript.js" />
+    <Content Include="HelloFlask\templates\AccountLogic\login.html" />
+    <Content Include="HelloFlask\templates\AccountLogic\signup.html" />
+    <Content Include="HelloFlask\templates\add_item.html" />
+    <Content Include="HelloFlask\templates\index.html" />
+    <Content Include="HelloFlask\templates\items.html" />
+    <Content Include="HelloFlask\templates\L&amp;F.html" />
     <Content Include="requirements.txt" />
+    <Content Include="setup.sh">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
@@ -47,7 +90,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HelloFlask\" />
+    <Folder Include="HelloFlask\static\" />
+    <Folder Include="HelloFlask\static\images\" />
+    <Folder Include="HelloFlask\static\css\" />
+    <Folder Include="HelloFlask\static\js\" />
     <Folder Include="HelloFlask\templates\" />
+    <Folder Include="HelloFlask\templates\AccountLogic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.12" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

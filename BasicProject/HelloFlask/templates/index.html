@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restricted Area Map</title>
+    <style>
+        #map {
+            height: 900px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <button id="loginButton" data-url="{{ url_for('account.login') }}">Log In</button>
+    <div id="map"></div>
+    <!-- Google Maps JavaScript API with callback to initMap function in map.js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpJ6Oa8-l0r8Pf16RjCsgDUbsvOPotAGU&callback=initMap" async defer></script>
+    <!-- Link to the external JS file -->
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/AccountLogic.js') }}"></script>
+</body>
+</html>
