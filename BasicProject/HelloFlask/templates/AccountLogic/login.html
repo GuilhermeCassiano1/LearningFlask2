@@ -17,7 +17,6 @@
         <div class="login-box">
             <!-- Logo -->
             <img src="{{ url_for('static', filename='images/unr_logo.png') }}" alt="University of Nevada, Reno Logo" class="logo">
-            <h2>Sign in</h2>
             <!-- Form with your functionalities -->
             <form method="POST" action="{{ url_for('account.login') }}">
                 <!-- Email Input -->
@@ -35,10 +34,6 @@
                 <!-- Submit Button -->
                 <button type="submit">Log In</button>
             </form>
-            <!-- Sign-up Button -->
-            <div class="signin-options">
-                <button id="signupButton" data-url="{{ url_for('account.signup') }}">Don't Have An Account?</button>
-            </div>
             <!-- Flashed Messages -->
             {% with messages = get_flashed_messages() %}
             {% if messages %}

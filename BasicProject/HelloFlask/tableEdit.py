@@ -35,7 +35,7 @@ def apply_changes():
     DROP COLUMN itemName;
     """
     # Execute the SQL to apply the change
-    cursor.execute("""
+    cursor.execute("""DELETE FROM users;
     """)
     
     # Commit changes and close

@@ -39,7 +39,7 @@ header {
 }
 
 .logo-group {
-    display:flex;
+    display: flex;
     align-items: center;
     gap: 15px;
 }
@@ -57,24 +57,18 @@ header nav ul {
     gap: 25px;
 }
 
-header nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
+    header nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
 
-header nav ul li a:hover {
-    color: #f3f4f6;
-}
+        header nav ul li a:hover {
+            color: #f3f4f6;
+        }
 
 /* Sidebar sort and filter styles */
-.main-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px; /* Adds space between sidebar and products */
-}
-
 .sidebar {
     flex: 0 0 250px; /* Fixes sidebar width */
     position: sticky; /* Ensures it stays fixed when scrolling */
@@ -89,22 +83,21 @@ header nav ul li a:hover {
     margin-top: 60px;
 }
 
-
-.sidebar h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
+    .sidebar h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
 
 .filter-section {
     margin-bottom: 20px;
 }
 
-.filter-section label,
-.filter-section select {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-}
+    .filter-section label,
+    .filter-section select {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
 /* Product(items) Styles */
 #products {
@@ -112,10 +105,10 @@ header nav ul li a:hover {
     margin-left: 200px;
 }
 
-#products h2 {
-    text-align: left; /* Aligns the subheader to the left */
-    margin-bottom: 20px; /* Adds space between the subheader and the grid */
-}
+    #products h2 {
+        text-align: left; /* Aligns the subheader to the left */
+        margin-bottom: 20px; /* Adds space between the subheader and the grid */
+    }
 
 .product h3 span {
     font-weight: normal; /* Set non-bold font weight */
@@ -130,10 +123,10 @@ header nav ul li a:hover {
     transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
-.product:hover {
-    transform: translateY(-5px); /* Move up slightly */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
+    .product:hover {
+        transform: translateY(-5px); /* Move up slightly */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    }
 
 .product-grid {
     display: grid;
@@ -148,4 +141,10 @@ footer {
     text-align: center;
     padding: 10px 0;
     font-size: 0.9em;
+}
+
+.main-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Adds space between sidebar and products */
 }

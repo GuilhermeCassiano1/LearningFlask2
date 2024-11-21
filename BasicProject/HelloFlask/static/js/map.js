@@ -25,29 +25,25 @@ function initMap() {
         styles: mapStyles 
     });
 
-    const tourStops = [
-        { position: { lat: 39.54360464344734, lng: -119.81512379814838 }, title: "KC" },
-        { position: { lat: 39.5400138786115, lng: -119.81460881399342 }, title: "Ansari Business" },
-        { position: { lat: 39.53900032267345, lng: -119.81252741989516 }, title: "DMSC" },
-        { position: { lat: 39.53999962488407, lng: -119.81330075020244 }, title: "SEM" },
-        { position: { lat: 39.53980160266187, lng: -119.81196528367359 }, title: "WPEB" },
-    ];
+    fetch('/api/buildings')
+        .then(response => response.json())
+        .then(data => {
+            // Add markers dynamically from the fetched data
+            data.forEach(({ buildingCode, latitude, longitude }, i) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map,
+                    buildingCode: `${i + 1}. ${buildingCode}`,
+                });
 
-    const infoWindow = new google.maps.InfoWindow();
-
-    tourStops.forEach(({ position, title }, i) => {
-        const marker = new google.maps.Marker({
-            position,
-            map,
-            title: `${i + 1}. ${title}`,
-        });
-
-        marker.addListener('click', function () {
-
-            window.location.href = "/L&F";
-
-        });
-    });
+                // Add a click listener for each marker
+                marker.addListener('click', function () {
+                    const building = encodeURIComponent(buildingCode);  // Safely encode the title for the URL
+                    window.location.href = `/L&F?building=${building}`;
+                });
+            });
+        })
+        .catch(error => console.error('Error fetching building data:', error));
 }
 
 window.onload = function () {

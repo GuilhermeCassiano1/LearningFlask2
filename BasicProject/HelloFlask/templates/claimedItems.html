@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNR Lost and Found</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/L&F.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/claimedItems.css') }}">
 </head>
 
 <body>
@@ -17,13 +17,13 @@
                     University of Nevada, Reno
                 </span>
             </div>
-            <h1>Lost and Found</h1>
+            <h1>Claimed Items</h1>
             <nav>
                 <ul>
                     <li><a href="{{ url_for('main.home') }}">Map</a></li>
                     <li><a href="{{ url_for('main.Reportitems', building=building) }}">Report Found Item</a></li>
+                    <li><a href="{{ url_for('main.info', building=building) }}">Lost and Found</a></li>
                     <li><a href="{{ url_for('main.Removeitems', building=building) }}">Remove an Item</a></li>
-                    <li><a href="{{ url_for('main.ClaimedItems', building=building) }}">Claimed Items</a></li>
                     <li><a href="#">Health and Safety</a></li>
                 </ul>
             </nav>
@@ -34,27 +34,29 @@
         <!--Sidebar for sort and filter-->
         <aside class="sidebar">
             <h2>Sort & Filter</h2>
+            <!--Sort section-->
             <div class="filter-section">
                 <label for="sort">Sort By:</label>
                 <select id="sort" onchange="sortItems()">
-                    <option value="date">Date Found: Oldest</option>
-                    <option value="date">Date Found: Newest</option>
+                    <option value="date">Date Claimed: Oldest</option>
+                    <option value="date">Date Claimed: Newest</option>
                 </select>
             </div>
+            <!--Filter section-->
             <div class="filter-section">
                 <label for="filterType">Filter by Type:</label>
                 <select id="filterType" onchange="filterItems()">
-                    <option value="all">All</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="technology">Technology</option>
-                    <option value="misc">Miscellaneous</option>
+                    <option value="all" {% if filterType =='all' %}selected{% endif %}>All</option>
+                    <option value="clothing" {% if filterType =='clothing' %}selected{% endif %}>Clothing</option>
+                    <option value="technology" {% if filterType =='technology' %}selected{% endif %}>Technology</option>
+                    <option value="misc" {% if filterType =='misc' %}selected{% endif %}>Miscellaneous</option>
                 </select>
             </div>
         </aside>
 
         <!--Products section-->
         <section id="products">
-            <h2>Found Items in Building: {{ building }}</h2>
+            <h2>Found Items in Building: {{ building}}</h2>
             <div class="product-grid">
                 {% if items %}
                 {% for item in items %}
@@ -62,6 +64,7 @@
                     <h3><strong>Item type:</strong> <span>{{ item[0] }}</span></h3>
                     <h3><strong>Location found:</strong> <span>{{ item[1] }}</span></h3>
                     <h3><strong>Date found:</strong> <span>{{ item[3] }}</span></h3>
+                    <h3><strong>Date claimed:</strong> <span>{{ item[4] }}</span></h3>
                     <h3><strong>Description:</strong> <span>{{ item[2] }}</span></h3>
                 </div>
                 {% endfor %}
@@ -70,21 +73,12 @@
                 {% endif %}
             </div>
         </section>
+
     </div>
     <!--Footer section-->
     <footer>
         <p>&copy; 2024 University of Nevada, Reno. Lost and Found Service.</p>
     </footer>
-
-    <script>
-        function filterItems() {
-            // Get the selected filter type
-            const filterType = document.getElementById('filterType').value;
-
-            // Redirect to the L&F page with the filterType as a query parameter
-            window.location.href = `/L&F?filterType=${filterType}`;
-        }
-    </script>
 </body>
 
 </html>

@@ -14,21 +14,6 @@ def create_tables():
     # Create a cursor object
     cursor = conn.cursor()
 
-    # 2024-11-12: Created Items and Building tables
-
-    """
-    CREATE TABLE IF NOT EXISTS building (
-    buildingCode VARCHAR(50) PRIMARY KEY
-    );
-    """
-    """
-    CREATE TABLE IF NOT EXISTS items (
-    itemName VARCHAR(50),
-    itemDescription VARCHAR(100),
-    dateLost DATE,
-    PRIMARY KEY (itemName, dateLost)
-    );
-    """
 
     # 2024-14-11 Created users Table
 
@@ -41,8 +26,41 @@ def create_tables():
     );
     """
 
+    # 2024-17-11 Created Claimed Items, Items and Buildings Table
+    """
+    CREATE TABLE IF NOT EXISTS claimedItems (
+    itemType VARCHAR(50),
+    LocationFound VARCHAR(100),
+    itemDescription VARCHAR(100),
+    dateFound DATE,
+    dateClaimed DATE,
+    LFlocation VARCHAR(10),
+    PRIMARY KEY (itemType, LocationFound, itemDescription)
+    );
+    """
+    """
+    CREATE TABLE IF NOT EXISTS items (
+    itemType VARCHAR(10),
+    LocationFound VARCHAR(100),
+    itemDescription VARCHAR(100),
+    dateFound DATE,
+    LFlocation VARCHAR(10),
+    PRIMARY KEY (itemType, LocationFound, itemDescription)
+    );
+    """
     # Define SQL queries for creating tables
-    create_table_queries = []
+    create_table_queries = [    
+    """
+    CREATE TABLE IF NOT EXISTS claimedItems (
+    itemType VARCHAR(50),
+    LocationFound VARCHAR(100),
+    itemDescription VARCHAR(100),
+    dateFound DATE,
+    dateClaimed DATE,
+    LFlocation VARCHAR(10),
+    PRIMARY KEY (itemType, LocationFound, itemDescription)
+    );
+    """]
 
     # Execute each query to create tables
     for query in create_table_queries:

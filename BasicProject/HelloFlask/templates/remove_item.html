@@ -22,7 +22,7 @@
                 <ul>
                     <li><a href="{{ url_for('main.home') }}">Map</a></li>
                     <li><a href="{{ url_for('main.Reportitems', building=building) }}">Report Found Item</a></li>
-                    <li><a href="{{ url_for('main.Removeitems', building=building) }}">Remove an Item</a></li>
+                    <li><a href="{{ url_for('main.info', building=building) }}">Lost and Found</a></li>
                     <li><a href="{{ url_for('main.ClaimedItems', building=building) }}">Claimed Items</a></li>
                     <li><a href="#">Health and Safety</a></li>
                 </ul>
@@ -30,10 +30,11 @@
         </div>
     </header>
 
-    <div class="main-content">
+    <div class="container">
         <!--Sidebar for sort and filter-->
         <aside class="sidebar">
             <h2>Sort & Filter</h2>
+            <!--Sort section-->
             <div class="filter-section">
                 <label for="sort">Sort By:</label>
                 <select id="sort" onchange="sortItems()">
@@ -41,20 +42,21 @@
                     <option value="date">Date Found: Newest</option>
                 </select>
             </div>
+            <!--Filter section-->
             <div class="filter-section">
                 <label for="filterType">Filter by Type:</label>
                 <select id="filterType" onchange="filterItems()">
-                    <option value="all">All</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="technology">Technology</option>
-                    <option value="misc">Miscellaneous</option>
+                    <option value="all" {% if filterType =='all' %}selected{% endif %}>All</option>
+                    <option value="clothing" {% if filterType =='clothing' %}selected{% endif %}>Clothing</option>
+                    <option value="technology" {% if filterType =='technology' %}selected{% endif %}>Technology</option>
+                    <option value="misc" {% if filterType =='misc' %}selected{% endif %}>Miscellaneous</option>
                 </select>
             </div>
         </aside>
 
         <!--Products section-->
         <section id="products">
-            <h2>Found Items in Building: {{ building }}</h2>
+            <h2>Found Items in Building: {{ building}}</h2>
             <div class="product-grid">
                 {% if items %}
                 {% for item in items %}
@@ -63,6 +65,13 @@
                     <h3><strong>Location found:</strong> <span>{{ item[1] }}</span></h3>
                     <h3><strong>Date found:</strong> <span>{{ item[3] }}</span></h3>
                     <h3><strong>Description:</strong> <span>{{ item[2] }}</span></h3>
+                    <form action="{{ url_for('main.Removeitems', building=building) }}" method="POST">
+                        <input type="hidden" name="itemType" value="{{ item[0] }}">
+                        <input type="hidden" name="locationFound" value="{{ item[1] }}">
+                        <input type="hidden" name="dateFound" value="{{ item[3] }}">
+                        <input type="hidden" name="description" value="{{ item[2] }}">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
                 </div>
                 {% endfor %}
                 {% else %}
@@ -70,6 +79,7 @@
                 {% endif %}
             </div>
         </section>
+
     </div>
     <!--Footer section-->
     <footer>
